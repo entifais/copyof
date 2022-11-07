@@ -11,17 +11,21 @@ MAPNAME="map.html"
 if not os.path.isfile(DATAPATH):
   writetxt(DATAPATH,"name,contact,lat,lng")
 class webpage():
-  @app.route("/")
+  @app.route("/cod2.html")
   def cod2():
     return render_template("cod2.html")
-  @app.route("/")
+  @app.route("/cod1.html")
   def cod1():#Cels10428
     return render_template("cod1.html")
   @app.route("/",methods=["GET","POST"])
   def index():
     if request.method=="POST":
-     name=request.form["name"]
+     code=request.form["code"]
+     if "Cels10428"==code:
+      return redirect("cod1.html") 
+     if "Arg10428"==code:
+      return redirect("cod2.html")
     return render_template("index.html")
       
 if __name__ == "__main__":
-  app.run(debug=True,host="127.0.0.1",port=5000)
+  app.run(debug=True,host="0.0.0.0",port=5000)
